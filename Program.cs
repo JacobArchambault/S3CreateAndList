@@ -12,14 +12,14 @@ namespace S3CreateAndList
         // Main method
         static async Task Main(string[] args)
         {
-            if (args.Length == 0)
-            {
-                Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets." + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
-            }
             if (args.Length > 1)
             {
                 Console.WriteLine(TooManyArgumentsMessage());
                 Environment.Exit(1);
+            }
+            if (args.Length == 0)
+            {
+                Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets." + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
             }
             // Create an S3 client object.
             var s3Client = new AmazonS3Client();
