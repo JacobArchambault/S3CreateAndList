@@ -20,27 +20,30 @@ namespace S3CreateAndList
 
             // Create an S3 client object.
             var s3Client = new AmazonS3Client();
+            if (args.Length == 0)
+            {
+                Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets." + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
+            }
             if (args.Length > 1)
             {
                 Console.WriteLine(TooManyArgumentsMessage());
                 Environment.Exit(1);
             }
-
-            // Parse the command line arguments for the bucket name.
-            if (BucketName.Get(args, out String bucketName))
+            if (args.Length == 1)
             {
                 // If a bucket name was supplied, create the bucket.
                 // Call the API method directly
                 try
                 {
-                    Console.WriteLine($"\nCreating bucket {bucketName}...");
-                    Console.WriteLine($"Result: {(await s3Client.PutBucketAsync(bucketName)).HttpStatusCode.ToString()}");
+                    Console.WriteLine($"\nCreating bucket {args[0]}...");
+                    Console.WriteLine($"Result: {(await s3Client.PutBucketAsync(args[0])).HttpStatusCode.ToString()}");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Caught exception when creating a bucket:");
                     Console.WriteLine(e.Message);
                 }
+
             }
 
             // List the buckets owned by the user.
