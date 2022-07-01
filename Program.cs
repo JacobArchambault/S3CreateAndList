@@ -43,11 +43,11 @@ namespace S3CreateAndList
             // List the buckets owned by the user.
             // Call a class method that calls the API method.
             Console.WriteLine("\nGetting a list of your buckets...");
-            var bucketList = (await s3Client.ListBucketsAsync()).Buckets;
-            Console.WriteLine($"Number of buckets: {bucketList.Count}");
-            foreach (S3Bucket b in bucketList)
+            var bucketNames = (await s3Client.ListBucketsAsync()).Buckets.Select(x => x.BucketName);
+            Console.WriteLine($"Number of buckets: {bucketNames.Count()}");
+            foreach (var b in bucketNames)
             {
-                Console.WriteLine(b.BucketName);
+                Console.WriteLine(b);
             }
         }
 
