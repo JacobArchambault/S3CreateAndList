@@ -15,15 +15,16 @@
                                         + "\n - bucket_name: A valid, globally unique bucket name."
                                         + "\n - If bucket_name isn't supplied, this utility simply lists your buckets.");
                 }
-                if (args.Length == 0)
-                {
-                    Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets."
-                                      + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
-                }
                 var s3Client = new ConsoleS3Client();
                 if (args.Length == 1)
                 {
                     await s3Client.PutBucketAsync(args[0]);
+                }
+                else
+                {
+                    Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets."
+                                       + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
+
                 }
                 await s3Client.ListBuckets();
             }
