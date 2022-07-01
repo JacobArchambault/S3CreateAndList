@@ -15,15 +15,16 @@ namespace S3CreateAndList
                 var s3Client = new VerboseS3Client();
                 if (args.Length == 1)
                 {
-                    await s3Client.PutBucketAsync(args[0]);
+                    Console.WriteLine(await s3Client.PutBucketAsync(args[0]));
                 }
                 else
                 {
-                    Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets."
+                    Console.WriteLine("No arguments specified. Will simply list your Amazon S3 buckets."
                                        + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
 
                 }
-                await s3Client.ListBuckets();
+                Console.WriteLine();
+                Console.WriteLine(await s3Client.ListBuckets());
             }
             catch (Exception e)
             {

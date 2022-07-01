@@ -1,24 +1,28 @@
+using System.Text;
 namespace S3CreateAndList
 {
     class VerboseS3Client
     {
         AmazonS3ClientService amazonS3ClientService  = new(); 
-        internal async Task ListBuckets()
+        internal async Task<string> ListBuckets()
         {
-            Console.WriteLine("\nGetting a list of your buckets...");
+            StringBuilder stringBuilder = new();
+            
+            stringBuilder.AppendLine("Getting a list of your buckets...");
             var bucketNames = await amazonS3ClientService.GetBucketNames();
-            Console.WriteLine($"Number of buckets: {bucketNames.Count()}");
+            stringBuilder.AppendLine($"Number of buckets: {bucketNames.Count()}");
             foreach (var b in bucketNames)
             {
-                Console.WriteLine(b);
+                stringBuilder.AppendLine(b);
             }
+            return stringBuilder.ToString();
         }
 
 
-        internal async Task PutBucketAsync(string bucketName)
+        internal async Task<string> PutBucketAsync(string bucketName)
         {
-            Console.WriteLine($"Creating bucket {bucketName}...");
-            Console.WriteLine($"Result: {await amazonS3ClientService.PutBucketAsync(bucketName)}");
+            return $"Creating bucket {bucketName}..."
+                   + $"\nResult: {await amazonS3ClientService.PutBucketAsync(bucketName)}";
         }
     }
 }
