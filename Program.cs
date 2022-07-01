@@ -22,7 +22,7 @@ namespace S3CreateAndList
             var s3Client = new AmazonS3Client();
 
             // Parse the command line arguments for the bucket name.
-            if (BucketName.GetBucketName(args, out String bucketName))
+            if (BucketName.Get(args, out String bucketName))
             {
                 // If a bucket name was supplied, create the bucket.
                 // Call the API method directly

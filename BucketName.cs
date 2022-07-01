@@ -4,7 +4,7 @@ namespace S3CreateAndList
     {
         // 
         // Method to parse the command line.
-        internal static Boolean GetBucketName(string[] args, out String bucketName)
+        internal static Boolean Get(string[] args, out String bucketName)
         {
             Boolean retval = false;
             bucketName = String.Empty;
