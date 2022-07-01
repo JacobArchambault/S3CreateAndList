@@ -41,7 +41,7 @@ namespace S3CreateAndList
       // List the buckets owned by the user.
       // Call a class method that calls the API method.
       Console.WriteLine("\nGetting a list of your buckets...");
-      var listResponse = await MyListBucketsAsync(s3Client);
+      var listResponse = await s3Client.ListBucketsAsync();
       Console.WriteLine($"Number of buckets: {listResponse.Buckets.Count}");
       foreach(S3Bucket b in listResponse.Buckets)
       {
@@ -80,13 +80,6 @@ namespace S3CreateAndList
       return retval;
     }
 
-
-    //
-    // Async method to get a list of Amazon S3 buckets.
-    private static async Task<ListBucketsResponse> MyListBucketsAsync(IAmazonS3 s3Client)
-    {
-      return await s3Client.ListBucketsAsync();
-    }
 
   }
 }
