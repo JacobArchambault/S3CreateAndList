@@ -1,6 +1,6 @@
 namespace S3CreateAndList
 {
-    class ConsoleS3Client
+    class VerboseS3Client
     {
         AmazonS3ClientService amazonS3ClientService  = new(); 
         internal async Task ListBuckets()
@@ -15,9 +15,9 @@ namespace S3CreateAndList
         }
 
 
-        internal async Task PrintPutResponse(string bucketName)
+        internal async Task PutBucketAsync(string bucketName)
         {
-            Console.WriteLine($"\nCreating bucket {bucketName}...");
+            Console.WriteLine($"Creating bucket {bucketName}...");
             Console.WriteLine($"Result: {await amazonS3ClientService.PutBucketAsync(bucketName)}");
         }
     }
