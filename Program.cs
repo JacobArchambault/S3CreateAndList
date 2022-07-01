@@ -9,11 +9,7 @@
             {
                 if (args.Length > 1)
                 {
-                    throw new Exception("Too many arguments specified."
-                                        + "\ndotnet_tutorials - A utility to list your Amazon S3 buckets and optionally create a new one."
-                                        + "\n\nUsage: S3CreateAndList [bucket_name]"
-                                        + "\n - bucket_name: A valid, globally unique bucket name."
-                                        + "\n - If bucket_name isn't supplied, this utility simply lists your buckets.");
+                    throw new TooManyArgumentsException();
                 }
                 var s3Client = new ConsoleS3Client();
                 if (args.Length == 1)
