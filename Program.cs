@@ -14,7 +14,7 @@
                 var s3Client = new ConsoleS3Client();
                 if (args.Length == 1)
                 {
-                    await s3Client.PutBucketAsync(args[0]);
+                    await s3Client.PrintPutResponse(args[0]);
                 }
                 else
                 {
