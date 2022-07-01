@@ -29,8 +29,7 @@ namespace S3CreateAndList
         try
         {
           Console.WriteLine($"\nCreating bucket {bucketName}...");
-          var createResponse = await s3Client.PutBucketAsync(bucketName);
-          Console.WriteLine($"Result: {createResponse.HttpStatusCode.ToString()}");
+          Console.WriteLine($"Result: {(await s3Client.PutBucketAsync(bucketName)).HttpStatusCode.ToString()}");
         }
         catch (Exception e)
         {
