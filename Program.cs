@@ -12,25 +12,32 @@ namespace S3CreateAndList
         // Main method
         static async Task Main(string[] args)
         {
-            Console.WriteLine("dotnet_tutorials - A utility to list your Amazon S3 buckets and optionally create a new one." +
-                  "\n\nUsage: S3CreateAndList [bucket_name]" +
-                  "\n - bucket_name: A valid, globally unique bucket name." +
-                  "\n - If bucket_name isn't supplied, this utility simply lists your buckets.");
-            if (args.Length > 1)
+            try
             {
-                Console.WriteLine("\nToo many arguments specified.");
-                Environment.Exit(1);
+                if (args.Length > 1)
+                {
+                    throw new Exception("Too many arguments specified."
+                                        + "\ndotnet_tutorials - A utility to list your Amazon S3 buckets and optionally create a new one."
+                                        + "\n\nUsage: S3CreateAndList [bucket_name]"
+                                        + "\n - bucket_name: A valid, globally unique bucket name."
+                                        + "\n - If bucket_name isn't supplied, this utility simply lists your buckets.");
+                }
+                if (args.Length == 0)
+                {
+                    Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets." + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
+                }
+                var s3Client = new ConsoleS3Client();
+                if (args.Length == 1)
+                {
+                    await s3Client.TryPutBucket(args[0]);
+                }
+                await s3Client.ListBuckets();
+
             }
-            if (args.Length == 0)
+            catch (Exception e)
             {
-                Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets." + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
+                Console.WriteLine(e.Message);
             }
-            var s3Client = new ConsoleS3Client();
-            if (args.Length == 1)
-            {
-                await s3Client.TryPutBucket(args[0]);
-            }
-            await s3Client.ListBuckets();
         }
     }
 }
