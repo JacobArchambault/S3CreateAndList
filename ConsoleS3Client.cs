@@ -2,7 +2,7 @@ using Amazon.S3;
 
 namespace S3CreateAndList
 {
-    class ConsoleS3Client 
+    class ConsoleS3Client
     {
         private readonly AmazonS3Client s3Client = new AmazonS3Client();
         internal async Task ListBuckets()
@@ -16,18 +16,10 @@ namespace S3CreateAndList
             }
         }
 
-        internal async Task TryPutBucket(string bucketName)
+        internal async Task PutBucketAsync(string bucketName)
         {
-            try
-            {
-                Console.WriteLine($"\nCreating bucket {bucketName}...");
-                Console.WriteLine($"Result: {(await s3Client.PutBucketAsync(bucketName)).HttpStatusCode.ToString()}");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Caught exception when creating a bucket:");
-                Console.WriteLine(e.Message);
-            }
+            Console.WriteLine($"\nCreating bucket {bucketName}...");
+            Console.WriteLine($"Result: {(await s3Client.PutBucketAsync(bucketName)).HttpStatusCode.ToString()}");
         }
 
     }
