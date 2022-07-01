@@ -8,7 +8,7 @@ namespace S3CreateAndList
         internal async Task ListBuckets()
         {
             Console.WriteLine("\nGetting a list of your buckets...");
-            var bucketNames = (await s3Client.ListBucketsAsync()).Buckets.Select(x => x.BucketName);
+            var bucketNames = await GetBucketNames();
             Console.WriteLine($"Number of buckets: {bucketNames.Count()}");
             foreach (var b in bucketNames)
             {
@@ -16,11 +16,20 @@ namespace S3CreateAndList
             }
         }
 
+        private async Task<IEnumerable<string>> GetBucketNames()
+        {
+            return (await s3Client.ListBucketsAsync()).Buckets.Select(x => x.BucketName);
+        }
+
         internal async Task PutBucketAsync(string bucketName)
         {
             Console.WriteLine($"\nCreating bucket {bucketName}...");
-            Console.WriteLine($"Result: {(await s3Client.PutBucketAsync(bucketName)).HttpStatusCode.ToString()}");
+            Console.WriteLine($"Result: {await GetPutResponse(bucketName)}");
         }
 
+        private async Task<string> GetPutResponse(string bucketName)
+        {
+            return (await s3Client.PutBucketAsync(bucketName)).HttpStatusCode.ToString();
+        }
     }
 }
