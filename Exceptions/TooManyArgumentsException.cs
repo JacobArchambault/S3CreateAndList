@@ -1,4 +1,4 @@
-namespace S3CreateAndList
+namespace S3CreateAndList.Exceptions
 {
     sealed class TooManyArgumentsException : Exception
     {

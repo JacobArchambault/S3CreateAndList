@@ -1,4 +1,5 @@
-﻿namespace S3CreateAndList
+﻿using S3CreateAndList.Exceptions;
+namespace S3CreateAndList
 {
     class Program
     {
