@@ -12,14 +12,6 @@ namespace S3CreateAndList
         // Main method
         static async Task Main(string[] args)
         {
-            // Before running this app:
-            // - Credentials must be specified in an AWS profile. If you use a profile other than
-            //   the [default] profile, also set the AWS_PROFILE environment variable.
-            // - An AWS Region must be specified either in the [default] profile
-            //   or by setting the AWS_REGION environment variable.
-
-            // Create an S3 client object.
-            var s3Client = new AmazonS3Client();
             if (args.Length == 0)
             {
                 Console.WriteLine("\nNo arguments specified. Will simply list your Amazon S3 buckets." + "\nIf you wish to create a bucket, supply a valid, globally unique bucket name.");
@@ -29,6 +21,8 @@ namespace S3CreateAndList
                 Console.WriteLine(TooManyArgumentsMessage());
                 Environment.Exit(1);
             }
+            // Create an S3 client object.
+            var s3Client = new AmazonS3Client();
             if (args.Length == 1)
             {
                 // If a bucket name was supplied, create the bucket.
