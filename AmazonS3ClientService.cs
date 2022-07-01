@@ -5,7 +5,7 @@ namespace S3CreateAndList
     {
         private readonly AmazonS3Client s3Client = new AmazonS3Client();
 
-        internal async Task<IEnumerable<string>> GetBucketNames()
+        internal async Task<IEnumerable<string>> ListBucketsAsync()
         {
             return (await s3Client.ListBucketsAsync()).Buckets.Select(x => x.BucketName);
         }

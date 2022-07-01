@@ -24,7 +24,7 @@ namespace S3CreateAndList
 
                 }
                 Console.WriteLine();
-                Console.WriteLine(await s3Client.ListBuckets());
+                Console.WriteLine(await s3Client.ListBucketsAsync());
             }
             catch (Exception e)
             {
